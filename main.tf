@@ -47,9 +47,9 @@ resource "aws_launch_template" "maintemp" {
 }
 
 resource "aws_autoscaling_group" "mainasg" {
-  desired_capacity     = 1
-  max_size             = 3
-  min_size             = 1
+  desired_capacity     = 4
+  max_size             = 6
+  min_size             = 2
   vpc_zone_identifier = aws_subnet.private[*].id
 
   launch_template {
