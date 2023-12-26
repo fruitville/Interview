@@ -39,7 +39,7 @@ resource "aws_route_table" "public" {
 resource "aws_launch_template" "example" {
   name = "example_template"
 
-  version = "$Latest" 
+  version = "Latest" 
 
   image_id = var.ami
   instance_type = var.instance_type
