@@ -36,8 +36,8 @@ resource "aws_route_table" "public" {
   }
 }
 
-resource "aws_launch_template" "example" {
-  name = "example_template"
+resource "aws_launch_template" "maintemp" {
+  name = "maintemp_template"
 
   version = "Latest" 
 
@@ -46,7 +46,7 @@ resource "aws_launch_template" "example" {
   key_name = var.key_name
 }
 
-resource "aws_autoscaling_group" "example" {
+resource "aws_autoscaling_group" "mainasg" {
   desired_capacity     = 1
   max_size             = 3
   min_size             = 1
@@ -54,7 +54,7 @@ resource "aws_autoscaling_group" "example" {
 
   launch_template {
     id      = aws_launch_template.example.id
-    version = "$Latest"  
+    version = "Latest"  
   }
 }
 
