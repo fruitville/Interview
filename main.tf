@@ -36,6 +36,28 @@ resource "aws_route_table" "public" {
   }
 }
 
+resource "aws_launch_template" "example" {
+  name = "example_template"
+
+  version = "$Latest" 
+
+  image_id = var.ami
+  instance_type = var.instance_type
+  key_name = var.key_name
+}
+
+resource "aws_autoscaling_group" "example" {
+  desired_capacity     = 1
+  max_size             = 3
+  min_size             = 1
+  vpc_zone_identifier = aws_subnet.private[*].id
+
+  launch_template {
+    id      = aws_launch_template.example.id
+    version = "$Latest"  
+  }
+}
+
 resource "aws_instance" "web_server" {
   ami             = var.ami
   instance_type   = var.instance_type
