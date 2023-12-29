@@ -34,3 +34,7 @@ variable "instance_type" {
   default     = "t2.small"
 }
 
+variable "security_group" { 
+    description = "Name of security group" 
+    default     = "my-jenkins-security-group-sep-2023" 
+}
