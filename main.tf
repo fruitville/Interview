@@ -46,39 +46,6 @@ resource "aws_launch_template" "maintemp" {
   key_name = var.key_name
 }
 
-resource "aws_security_group" "jenkins-sg-2023" {
-  name        = "var.security_group"
-  description = "security group for jenkins"
-  vpc_id      = aws_vpc.main.id
-
-
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
- ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
- # outbound from Jenkins server
-  egress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags= {
-    Name = var.security_group
-  }
-}
-
 resource "aws_autoscaling_group" "mainasg" {
   desired_capacity     = 4
   max_size             = 6
